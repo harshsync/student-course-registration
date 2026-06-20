@@ -1,4 +1,4 @@
-package com.harsh.studentcourseregistration;
+package com.harsh.studentcourseregistration.app;
 
 import com.harsh.studentcourseregistration.config.HibernateUtil;
 import org.hibernate.SessionFactory;
