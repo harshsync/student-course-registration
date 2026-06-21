@@ -50,8 +50,33 @@ public class StudentDAO
                     session.close();
                 }
 
-        }
+            }
             return student;
 
-    }
+        }
+
+        public void updateStudent(Student s)
+        {
+            Session session = null;
+            Transaction transaction = null;
+            try {
+                session = HibernateUtil.getSessionFactory().openSession();
+                transaction = session.beginTransaction();
+                if(s != null) {
+                    session.merge(s);
+                    transaction.commit();
+                }
+            }
+            catch (Exception e) {
+                if (transaction != null)
+                    transaction.rollback();
+
+                e.printStackTrace();
+            }
+            finally {
+                if (session != null) {
+                    session.close();
+                }
+            }
+        }
 }
