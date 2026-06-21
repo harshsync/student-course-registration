@@ -40,16 +40,18 @@ public class Main {
 //        System.out.println(s2);
 //        else
 //        System.out.println("Null pointing");
-        Student s = dao.getStudentById((long)1);
-        if(s != null)
-        {
-            s.setCgpa(7.9);
-            s.setDepartment("Ed Tech");
-            dao.updateStudent(s);
-            System.out.println(s);
-        }
-        else
-            System.out.println("Null");
+//        if(s != null)
+//        {
+//            s.setCgpa(7.9);
+//            s.setDepartment("Ed Tech");
+//            dao.updateStudent(s);
+//            System.out.println(s);
+//        }
+//        else
+//            System.out.println("Null");
+
+        dao.deleteStudent(1L);
+        System.out.println(dao.getStudentById(1L));
 
         HibernateUtil.shutdown();
     }
