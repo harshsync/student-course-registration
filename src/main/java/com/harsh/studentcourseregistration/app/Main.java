@@ -32,8 +32,15 @@ public class Main {
                 8.72
         );
         StudentDAO dao = new StudentDAO();
-        dao.saveStudent(s1);
-        System.out.println(s1);
+//        dao.saveStudent(s1);
+//        System.out.println(s1);
+
+        Student s2 = dao.getStudentById((long) 1);
+        if(s2 != null)
+        System.out.println(s2);
+        else
+        System.out.println("Null pointing");
+
 
         HibernateUtil.shutdown();
     }
