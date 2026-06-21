@@ -42,8 +42,8 @@ public class Student
 
     }
 
-    public Student(Long id, String firstName, String lastName, String email, String phoneNumber, String department, LocalDate dateOfBirth, String gender, String rollNumber, Integer admissionYear, Integer semester, Double cgpa) {
-        this.id = id;
+    public Student(String firstName, String lastName, String email, String phoneNumber, String department, LocalDate dateOfBirth, String gender, String rollNumber, Integer admissionYear, Integer semester, Double cgpa) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
