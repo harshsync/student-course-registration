@@ -1,9 +1,11 @@
 package com.harsh.studentcourseregistration.dao;
 import com.harsh.studentcourseregistration.config.HibernateUtil;
 import com.harsh.studentcourseregistration.entity.Student;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
 
 
 public class StudentDAO
@@ -88,7 +90,7 @@ public class StudentDAO
             {
                 session = HibernateUtil.getSessionFactory().openSession();
                 transaction = session.beginTransaction();
-                Student s = getStudentById(id);
+                Student s = session.find(Student.class, id);
                 if(s != null)
                 {
                     session.remove(s);
@@ -104,6 +106,32 @@ public class StudentDAO
                 e.printStackTrace();
             }
             finally {
+                if(session != null)
+                {
+                    session.close();
+                }
+            }
+        }
+
+        public List<Student> getAllStudents()
+        {
+            Session session = null;
+            try
+            {
+                session = HibernateUtil.getSessionFactory().openSession();
+                String q = "FROM Student";
+                Query query = session.createQuery(q);
+                if(query != null)
+                 return query.getResultList();
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
                 if(session != null)
                 {
                     session.close();
