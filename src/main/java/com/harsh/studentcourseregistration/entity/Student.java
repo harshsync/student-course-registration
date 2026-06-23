@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Student
 {
@@ -34,9 +38,14 @@ public class Student
     @Column(nullable = false)
     private Integer admissionYear;
 
+    @Column(nullable = false)
     private Integer semester;
+
+    @Column(nullable = false)
     private Double cgpa;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Course> courses = new HashSet<>();
     public Student()
     {
 
@@ -151,6 +160,14 @@ public class Student
 
     public void setCgpa(Double cgpa) {
         this.cgpa = cgpa;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 
     @Override
