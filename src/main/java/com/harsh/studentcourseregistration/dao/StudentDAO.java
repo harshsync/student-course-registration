@@ -1,11 +1,14 @@
 package com.harsh.studentcourseregistration.dao;
 import com.harsh.studentcourseregistration.config.HibernateUtil;
+import com.harsh.studentcourseregistration.entity.Course;
 import com.harsh.studentcourseregistration.entity.Student;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class StudentDAO
@@ -138,4 +141,66 @@ public class StudentDAO
                 }
             }
         }
+
+        public Set<Course> getCoursesOfStudent(Long studentId)
+        {
+            Session session = null;
+            try
+            {
+                session = HibernateUtil.getSessionFactory().openSession();
+                Student student = session.find(Student.class, studentId);
+                if(student != null)
+                    return student.getCourses();
+                return null;
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return null;
+            }
+            finally
+            {
+                if(session != null)
+                {
+                    session.close();
+                }
+            }
+        }
+
+        public void unenrollStudent(Long studentId, Long courseId)
+        {
+            Session session = null;
+            Transaction transaction = null;
+            try
+            {
+                session = HibernateUtil.getSessionFactory().openSession();
+                transaction = session.beginTransaction();
+                Student student = session.find(Student.class, studentId);
+                Course course = session.find(Course.class, courseId);
+                if(student != null && course != null)
+                {
+                    student.getCourses().remove(course);
+
+                    session.merge(student);
+
+                    transaction.commit();
+                }
+            }
+            catch (Exception e)
+            {
+                if(transaction != null)
+                {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+            finally {
+                if(session != null)
+                {
+                    session.close();
+                }
+            }
+        }
+
 }

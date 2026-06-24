@@ -2,12 +2,15 @@ package com.harsh.studentcourseregistration.dao;
 
 import com.harsh.studentcourseregistration.config.HibernateUtil;
 import com.harsh.studentcourseregistration.entity.Course;
+import com.harsh.studentcourseregistration.entity.Student;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Set;
+
 
 public class CourseDAO
 {
@@ -130,6 +133,29 @@ public class CourseDAO
                 session.close();
             }
         }
+    }
 
+    public Set<Student> getStudentsOfCourse(Long courseId)
+    {
+        Session session = null;
+
+        try
+        {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Course course = session.find(Course.class, courseId);
+            if(course != null)
+                return course.getStudents();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally
+        {
+            if(session != null)
+            {
+                session.close();
+            }
+        }
     }
 }
