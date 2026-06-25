@@ -138,16 +138,28 @@ public class Course
 
     @Override
     public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", courseCode='" + courseCode + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", credits=" + credits +
-                ", department='" + department + '\'' +
-                ", semester=" + semester +
-                ", maxCapacity=" + maxCapacity +
-                ", instructor='" + instructor + '\'' +
-                ", courseFee=" + courseFee +
-                '}';
+        return """
+            ----------------------------------------
+            Course ID       : %d
+            Course Code     : %s
+            Course Name     : %s
+            Credits         : %d
+            Department      : %s
+            Semester        : %d
+            Max Capacity    : %d
+            Instructor      : %s
+            Course Fee      : %.2f
+            ----------------------------------------
+            """.formatted(
+                id,
+                courseCode,
+                courseName,
+                credits,
+                department,
+                semester,
+                maxCapacity,
+                instructor,
+                courseFee
+        );
     }
 }

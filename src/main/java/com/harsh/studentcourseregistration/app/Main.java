@@ -93,14 +93,56 @@ public class Main {
                 case 1 :
 
                     ob.nextLine();
-                    System.out.println("Enter the first name");
-                    String firstName = ob.nextLine();
-                    System.out.println("Enter the last name");
-                    String lastName = ob.nextLine();
-                    System.out.println("Enter email :");
-                    String email = ob.nextLine();
-                    System.out.println("Enter the phone number -");
-                    String phoneNumber = ob.nextLine();
+
+                    String firstName;
+                    while(true)
+                    {
+                        System.out.print("Enter First Name: ");
+                        firstName = ob.nextLine();
+
+                        if(!firstName.trim().isEmpty())
+                            break;
+
+                        System.out.println("First name cannot be empty.");
+                    }
+
+
+                    String lastName = "";
+                    while(true)
+                    {
+                        System.out.print("Enter First Name: ");
+                        firstName = ob.nextLine();
+
+                        if(!firstName.trim().isEmpty())
+                            break;
+
+                        System.out.println("First name cannot be empty.");
+                    }
+
+
+                    String email;
+                    while(true)
+                    {
+                        System.out.print("Enter Email: ");
+                        email = ob.nextLine();
+
+                        if(email.contains("@") && email.contains("."))
+                            break;
+
+                        System.out.println("Invalid email.");
+                    }
+
+                    String phone;
+                    while(true)
+                    {
+                        System.out.print("Enter Phone Number: ");
+                        phone = ob.nextLine();
+
+                        if(phone.matches("\\d{10}"))
+                            break;
+
+                        System.out.println("Phone number must contain exactly 10 digits.");
+                    }
 
                     System.out.println("Enter the Department - ");
                     String department = ob.nextLine();
@@ -126,16 +168,43 @@ public class Main {
                     System.out.println("Enter the roll no.");
                     String rollNo = ob.nextLine();
 
-                    System.out.println("Enter the admission year");
-                    Integer admYear = ob.nextInt();
+                    Integer admissionYear;
+                    while(true)
+                    {
+                        System.out.print("Enter Admission Year: ");
+                        admissionYear = ob.nextInt();
 
-                    System.out.println("Enter the semster ");
-                    Integer semester = ob.nextInt();
+                        if(admissionYear >= 2000 && admissionYear <= LocalDate.now().getYear())
+                            break;
 
-                    System.out.println("Enter the CGPA");
-                    Double cgpa = ob.nextDouble();
+                        System.out.println("Invalid admission year.");
+                    }
 
-                    student = new Student(firstName, lastName, email, phoneNumber, department, dob, gender, rollNo, admYear, semester, cgpa);
+                    Integer semester;
+                    while(true)
+                    {
+                        System.out.print("Enter Semester: ");
+                        semester = ob.nextInt();
+
+                        if(semester >= 1 && semester <= 8)
+                            break;
+
+                        System.out.println("Semester must be between 1 and 8.");
+                    }
+
+                    Double cgpa;
+                    while(true)
+                    {
+                        System.out.print("Enter CGPA: ");
+                        cgpa = ob.nextDouble();
+
+                        if(cgpa >= 0 && cgpa <= 10)
+                            break;
+
+                        System.out.println("CGPA must be between 0 and 10.");
+                    }
+
+                    student = new Student(firstName, lastName, email, phone, department, dob, gender, rollNo, admissionYear, semester, cgpa);
                     dao.saveStudent(student);
                     System.out.println("Student Added");
 

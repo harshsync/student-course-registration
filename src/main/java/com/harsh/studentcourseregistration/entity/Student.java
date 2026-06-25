@@ -172,19 +172,33 @@ public class Student
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", department='" + department + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                ", rollNumber='" + rollNumber + '\'' +
-                ", admissionYear=" + admissionYear +
-                ", semester=" + semester +
-                ", cgpa=" + cgpa +
-                '}';
+        return """
+            ----------------------------------------
+            Student ID      : %d
+            Name            : %s %s
+            Email           : %s
+            Phone Number    : %s
+            Department      : %s
+            Date of Birth   : %s
+            Gender          : %s
+            Roll Number     : %s
+            Admission Year  : %d
+            Semester        : %d
+            CGPA            : %.2f
+            ----------------------------------------
+            """.formatted(
+                id,
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+                department,
+                dateOfBirth,
+                gender,
+                rollNumber,
+                admissionYear,
+                semester,
+                cgpa
+        );
     }
 }
